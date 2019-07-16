@@ -17,21 +17,23 @@
     <br>
     <p id="word"></p>
     <br>
-    <p>wrong letters: </p>
+    <p>wrong letters:</p>
     <p id="score"></p>
     <br>
     <p>guesses left:</p>
-    <p is="sadness"></p>
+    <p id="sadness"></p>
     <script>
         var wds = ["rectangle", "pistachio", "excuse", "dictate", "mushroom", "suspenders", "guacamole", "sad", "marble", "communism", "stupid", "citrus", "ion", "northwest", "combine", "regenerate", "taconite", "vape", "stardust", "guinea", "hatchet", "cardboard", "ecstasy", "getelementbyid", "cactus",];
         var pick = wds[Math.floor(Math.random() * wds.length)];
         var word = $("#word");
         var score = $("#score");
+        var numb = $("#sadness")
         var p1 = $("<p>");
         var p2 = $("<p>");
+        var p3 = $("<p>");
         var wrong = [];
         var answer = [];
-        var stp = pick.length * 2;
+        var stp = pick.length;
 
         for (var q = 0; q < pick.length; q++) {
             answer[q] = "_";
@@ -40,6 +42,10 @@
         p1.text(answer.join(" "));
         word.append(p1);
         console.log(pick);
+
+        p3.text(stp);
+        numb.append(p3);
+        console.log(stp);
 
         document.onkeyup = function (event) {
             var inp = event.key.toLowerCase();
@@ -60,7 +66,11 @@
                 wrong.push(inp)
                 p2.text(wrong.join(" "));
                 score.append(p2);
-                stp - 1;
+                stp--;
+
+                p3.text(stp);
+                numb.append(p3);
+                console.log(stp);
             }
         }
     </script>
