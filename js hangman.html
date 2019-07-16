@@ -28,6 +28,8 @@
         var p2 = $("<p>");
         var wrong = [];
         var answer = [];
+        var stp = ["_"];
+        var newa = [];
 
         for (var q = 0; q < pick.length; q++) {
             answer[q] = "_";
@@ -39,24 +41,32 @@
 
         document.onkeyup = function (event) {
             var inp = event.key;
-            console.log(inp)
-            var stp = true;
             for (var w = 0; w < pick.length; w++) {
                 if (pick[w] === inp) {
                     answer[w] = inp;
                 }
-                if ( !== inp && stp === true) {
-                wrong.push(inp)
-                p2.text(wrong.join(" "));
-                score.append(p2);
-                console.log(wrong);
-                stp = false;
-            }
             }
 
             console.log(answer.join(" "));
             p1.text(answer.join(" "));
             word.append(p1);
+
+            newa = $(answer).not(stp);
+            console.log(newa);
+
+            for (var e = 0; e < stp.length; e++) {
+                if (newa[e] !== inp) {
+                    console.log(newa, inp)
+                    wrong.push(newa[newa.length - 1])
+                    p2.text(wrong.join(" "));
+                    score.append(p2);
+                }
+            }
+            
+            if (wrong[wrong.length - 1] === stp[stp.length - 1]) {
+                console.log(score);
+            }
+
         }
     </script>
 </body>
