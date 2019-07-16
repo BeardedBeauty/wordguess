@@ -19,8 +19,11 @@
     <br>
     <p>wrong letters: </p>
     <p id="score"></p>
+    <br>
+    <p>guesses left:</p>
+    <p is="sadness"></p>
     <script>
-        var wds = ["rectangle", "pistachio", "excuse", "dictate", "mushroom", "suspenders", "guacamole", "sad", "marble", "communism", "stupid", "citrus", "ion", "northwest", "combine", "regenerate", "taconite", "vape", "stardust", "guinea", "hatchet", "cardboard", "ecstasy", "getelementbyid",];
+        var wds = ["rectangle", "pistachio", "excuse", "dictate", "mushroom", "suspenders", "guacamole", "sad", "marble", "communism", "stupid", "citrus", "ion", "northwest", "combine", "regenerate", "taconite", "vape", "stardust", "guinea", "hatchet", "cardboard", "ecstasy", "getelementbyid", "cactus",];
         var pick = wds[Math.floor(Math.random() * wds.length)];
         var word = $("#word");
         var score = $("#score");
@@ -28,8 +31,7 @@
         var p2 = $("<p>");
         var wrong = [];
         var answer = [];
-        var stp = ["_"];
-        var newa = [];
+        var stp = pick.length * 2;
 
         for (var q = 0; q < pick.length; q++) {
             answer[q] = "_";
@@ -40,33 +42,26 @@
         console.log(pick);
 
         document.onkeyup = function (event) {
-            var inp = event.key;
+            var inp = event.key.toLowerCase();
+            var donewiththisstupidjs = false;
             for (var w = 0; w < pick.length; w++) {
                 if (pick[w] === inp) {
                     answer[w] = inp;
+                    donewiththisstupidjs = true;
+                    console.log(answer.join(" "));
+                    p1.text(answer.join(" "));
+                    word.append(p1);
                 }
             }
 
-            console.log(answer.join(" "));
-            p1.text(answer.join(" "));
-            word.append(p1);
+            if (donewiththisstupidjs) { return };
 
-            newa = $(answer).not(stp);
-            console.log(newa);
-
-            for (var e = 0; e < stp.length; e++) {
-                if (newa[e] !== inp) {
-                    console.log(newa, inp)
-                    wrong.push(newa[newa.length - 1])
-                    p2.text(wrong.join(" "));
-                    score.append(p2);
-                }
+            if (wrong.indexOf(answer) < 0) {
+                wrong.push(inp)
+                p2.text(wrong.join(" "));
+                score.append(p2);
+                stp - 1;
             }
-            
-            if (wrong[wrong.length - 1] === stp[stp.length - 1]) {
-                console.log(score);
-            }
-
         }
     </script>
 </body>
