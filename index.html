@@ -15,7 +15,7 @@
 <body>
     <p>wordguess, dude. i got a lotta weird words, better guess creatively</p>
     <br>
-    <p id="word">Press any key to start!</p>
+    <p id="word"></p>
     <br>
     <p>wrong letters:</p>
     <p id="score"></p>
@@ -34,21 +34,25 @@
         var wrong = [];
         var answer = [];
         var stp = pick.length;
-        var win = false;
-
         for (var q = 0; q < pick.length; q++) {
             answer[q] = "_";
         }
-
         p1.text(answer.join(" "));
         word.append(p1);
         console.log(pick);
-
         p3.text(stp);
         numb.append(p3);
         console.log(stp);
-
         document.onkeyup = function (event) {
+
+            if (stp === 0) {
+                var pick2 = wds[Math.floor(Math.random() * wds.length)];
+                p1.text(answer.join(" "));
+                word.append(p1);
+                console.log(pick2);
+                return
+            }
+
             var inp = event.key.toLowerCase();
             var donewiththisstupidjs = false;
             for (var w = 0; w < pick.length; w++) {
@@ -60,15 +64,12 @@
                     word.append(p1);
                 }
             }
-
             if (donewiththisstupidjs) { return };
-
             if (wrong.indexOf(answer) < 0) {
                 wrong.push(inp)
                 p2.text(wrong.join(" "));
                 score.append(p2);
                 stp--;
-
                 p3.text(stp);
                 numb.append(p3);
                 console.log(stp);
