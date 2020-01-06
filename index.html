@@ -43,28 +43,29 @@
         p3.text(stp);
         numb.append(p3);
         console.log(stp);
-        document.onkeyup = function (event) {
 
+        document.onkeyup = function (event) {
             if (stp === 0) {
                 var pick2 = wds[Math.floor(Math.random() * wds.length)];
                 p1.text(answer.join(" "));
                 word.append(p1);
                 console.log(pick2);
-                return
-            }
+                return;
+            };
 
             var inp = event.key.toLowerCase();
-            var donewiththisstupidjs = false;
+            var sw = false;
             for (var w = 0; w < pick.length; w++) {
                 if (pick[w] === inp) {
                     answer[w] = inp;
-                    donewiththisstupidjs = true;
+                    sw = true;
                     console.log(answer.join(" "));
                     p1.text(answer.join(" "));
                     word.append(p1);
-                }
-            }
-            if (donewiththisstupidjs) { return };
+                };
+            };
+
+            if (sw) { return };
             if (wrong.indexOf(answer) < 0) {
                 wrong.push(inp)
                 p2.text(wrong.join(" "));
@@ -73,8 +74,8 @@
                 p3.text(stp);
                 numb.append(p3);
                 console.log(stp);
-            }
-        }
+            };
+        };
     </script>
 </body>
 
